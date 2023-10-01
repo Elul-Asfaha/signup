@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
+import { BiShowAlt, BiHide } from "react-icons/bi";
+import { useState } from "react";
 const Form = () => {
     const formik = useFormik({
         initialValues: {
@@ -10,24 +11,26 @@ const Form = () => {
         },
         validationSchema: Yup.object({
             name: Yup.string()
-                .max(15, "Must be 15 characters or less")
+                .max(20, "Must be 20 characters or less")
                 .required("Required"),
             email: Yup.string()
                 .email("Must be a valid email address")
                 .required("Required"),
             password: Yup.string()
-                .max(15, "Must be a password")
-                .required("Required"),
+                .min(8, "Password must have at least 8 characters")
+                .matches(/[0-9]/, "must have atleast 1 number")
+                .matches(/[a-z]/, "must have a lowercase character")
+                .matches(/[A-Z]/, "must have an uppercase character"),
         }),
         onSubmit: (values) => {
             console.log(values);
         },
     });
-
+    const [showPassword, setShowPassword] = useState(false);
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className='flex flex-col gap-5'>
             <div className='flex flex-col gap-3'>
-                <div className='w-full flex flex-col gap-1'>
+                <div className='w-full flex flex-col gap-[6px]'>
                     <label>Name</label>
                     <input
                         type='text'
@@ -37,13 +40,13 @@ const Form = () => {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.name}
-                        className='w-full bg-[#0B1B32] outline-[#203858] py-2 px-3 rounded-md'
+                        className='w-full bg-[#0B1B32] outline-none py-2 px-3 rounded-md'
                     />
                     {formik.touched.name && formik.errors.name && (
-                        <p>{formik.errors.name}</p>
+                        <p className='text-[red]'>{formik.errors.name}</p>
                     )}
                 </div>
-                <div className='w-full flex flex-col gap-1'>
+                <div className='w-full flex flex-col gap-[6px]'>
                     <label>Email</label>
                     <input
                         type='email'
@@ -53,28 +56,50 @@ const Form = () => {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.email}
-                        className='w-full bg-[#0B1B32] outline-[#203858] py-2 px-3 rounded-md'
+                        className='w-full bg-[#0B1B32] outline-none py-2 px-3 rounded-md'
                     />
                     {formik.touched.email && formik.errors.email && (
-                        <p>{formik.errors.email}</p>
+                        <p className='text-[red]'>{formik.errors.email}</p>
                     )}
                 </div>
-                <div className='w-full flex flex-col gap-1'>
+                <div className='w-full flex flex-col gap-[6px]'>
                     <label>Password</label>
-                    <input
-                        type='password'
-                        id='password'
-                        name='password'
-                        placeholder='Password'
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.password}
-                        className='w-full bg-[#0B1B32] outline-[#203858] py-2 px-3 rounded-md'
-                    />
-                    <p>Must be atleast 8 characters</p>
+                    <div className='flex items-center w-full bg-[#0B1B32]  px-3 rounded-md'>
+                        <input
+                            type={`${showPassword ? "text" : "password"}`}
+                            id='password'
+                            name='password'
+                            placeholder='Password'
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.password}
+                            className='w-full bg-[#0B1B32] outline-none  py-2'
+                        />
+                        <div
+                            className='text-2xl'
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {!showPassword ? <BiShowAlt /> : <BiHide />}
+                        </div>
+                    </div>
+
                     {formik.touched.password && formik.errors.password && (
-                        <p>{formik.errors.password}</p>
+                        <p className='text-[red]'>{formik.errors.password}</p>
                     )}
+
+                    <div className='flex flex-col text-sm'>
+                        <p className='text-gray-500'>
+                            Must be atleast 8 characters
+                        </p>
+                        <p className='text-gray-500'>Must contain a number</p>
+
+                        <p className='text-gray-500'>
+                            Must contain an uppercase characters
+                        </p>
+                        <p className='text-gray-500'>
+                            Must contain a lowercase characters
+                        </p>
+                    </div>
                 </div>
             </div>
             <button

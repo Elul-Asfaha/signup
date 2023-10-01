@@ -5,7 +5,7 @@ import { AiFillStar } from "react-icons/ai";
 import Form from "./form";
 const Signup = () => {
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 bg-[#112540] md:w-[90%] lg:w-[80%] xl:min-w-[50%] xl:max-w-[70%] min-h-[700px] rounded-lg'>
+        <div className='grid grid-cols-1 md:grid-cols-2 bg-[#112540] md:w-[90%] lg:w-[80%] xl:min-w-[800px] xl:w-[70%] xl:max-w-[1000px] min-h-[700px] rounded-lg'>
             <div className='flex flex-col gap-3 text-white p-5'>
                 <p className='text-2xl'>Let's get you Signed Up</p>
                 <p className='text-gray-500'>Start your 30-day free trial</p>
@@ -26,7 +26,7 @@ const Signup = () => {
                 <Form />
             </div>
             <div className='flex flex-col justify-center px-5 md:px-10'>
-                <div className='flex flex-col gap-2 items-center px-8 bg-[#0B1B32] rounded-lg min-h-fit md:h-[90%] py-10'>
+                <div className='flex flex-col gap-2 items-center px-8 bg-[#0B1B32] rounded-lg min-h-fit overflow-y-scroll scrollbar-hide md:h-[90%] py-10'>
                     <p className='text-gray-300 text-center'>
                         We currently use Reaktion across our customers to give
                         them better instight into their entire buisness.
