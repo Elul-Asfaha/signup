@@ -8,6 +8,7 @@ const Form = () => {
             name: "",
             email: "",
             password: "",
+            terms: false,
         },
         validationSchema: Yup.object({
             name: Yup.string()
@@ -21,6 +22,7 @@ const Form = () => {
                 .matches(/[0-9]/, "must have atleast 1 number")
                 .matches(/[a-z]/, "must have a lowercase character")
                 .matches(/[A-Z]/, "must have an uppercase character"),
+            terms: Yup.boolean().required(),
         }),
         onSubmit: (values) => {
             console.log(values);
@@ -28,7 +30,10 @@ const Form = () => {
     });
     const [showPassword, setShowPassword] = useState(false);
     return (
-        <form onSubmit={formik.handleSubmit} className='flex flex-col gap-5'>
+        <form
+            onSubmit={formik.handleSubmit}
+            className='flex flex-col  h-full gap-5'
+        >
             <div className='flex flex-col gap-3'>
                 <div className='w-full flex flex-col gap-[6px]'>
                     <label>Name</label>
@@ -94,20 +99,40 @@ const Form = () => {
                         <p className='text-gray-500'>Must contain a number</p>
 
                         <p className='text-gray-500'>
-                            Must contain an uppercase characters
+                            Must contain an uppercase character
                         </p>
                         <p className='text-gray-500'>
-                            Must contain a lowercase characters
+                            Must contain a lowercase character
                         </p>
                     </div>
+                </div>
+                <div className='w-full flex text-sm gap-5'>
+                    <input
+                        type='checkbox'
+                        id='terms'
+                        name='terms'
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        checked={formik.values.terms}
+                        className=' bg-[#0B1B32] outline-none rounded-md'
+                    />
+                    <p>
+                        By clicking CREATE ACCOUNT you agree to our{" "}
+                        <span className='text-blue-600'>Terms of Service</span>{" "}
+                        & <span className='text-blue-600'>Privacy Policy</span>
+                    </p>
                 </div>
             </div>
             <button
                 type='submit'
-                className='bg-[#00C575] font-semibold uppercase rounded-md w-full text-center py-2'
+                className='bg-[#00c552] justify-end font-semibold uppercase rounded-md w-full text-center mb-10 py-2'
             >
                 create a free account
             </button>
+            <div className='flex justify-center w-full gap-5 text-center'>
+                <p className='w-fit'>Already have an Account?</p>{" "}
+                <button className='text-[#00c552]'>Login</button>
+            </div>
         </form>
     );
 };
