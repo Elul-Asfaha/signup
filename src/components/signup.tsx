@@ -56,7 +56,7 @@ const Signup = () => {
                         />
                     </div>
                     <p className='text-white'>
-                        Emil nissen -{" "}
+                        Draxx Yafet -{" "}
                         <span className='text-gray-200'>CEO & Director</span>
                     </p>
                     <div className='flex gap-1 text-xl text-orange-500'>
