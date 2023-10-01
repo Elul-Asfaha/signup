@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const Form = () => {
     const formik = useFormik({
@@ -7,10 +8,21 @@ const Form = () => {
             email: "",
             password: "",
         },
+        validationSchema: Yup.object({
+            name: Yup.string()
+                .max(15, "Must be 15 characters or less")
+                .required("Required"),
+            email: Yup.string()
+                .max(15, "Must be a vali email address")
+                .required("Required"),
+        }),
+        onSubmit: (values) => {
+            console.log(values);
+        },
     });
 
     return (
-        <form>
+        <form onSubmit={formik.handleSubmit}>
             <div className='flex flex-col gap-3'>
                 <div className='w-full flex flex-col gap-1'>
                     <label>Name</label>
@@ -50,6 +62,12 @@ const Form = () => {
                     <p>Must be atleast 8 characters</p>
                 </div>
             </div>
+            <button
+                type='submit'
+                className='bg-[#00C575] font-semibold uppercase rounded-md w-full text-center py-2'
+            >
+                create a free account
+            </button>
         </form>
     );
 };
