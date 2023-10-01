@@ -5,7 +5,7 @@ import { AiFillStar } from "react-icons/ai";
 import Form from "./form";
 const Signup = () => {
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 bg-[#112540] md:w-[90%] lg:w-[80%] xl:min-w-[800px] xl:w-[70%] xl:max-w-[1000px] min-h-[700px] rounded-lg'>
+        <div className='grid grid-cols-1 md:grid-cols-2 bg-[#112540] pb-10 md:pb-0 md:w-[90%] lg:w-[80%] xl:min-w-[800px] xl:w-[70%] xl:max-w-[1000px] min-h-[700px] rounded-lg'>
             <div className='flex flex-col gap-3 text-white p-5'>
                 <p className='text-2xl'>Let's get you Signed Up</p>
                 <p className='text-gray-500'>Start your 30-day free trial</p>
